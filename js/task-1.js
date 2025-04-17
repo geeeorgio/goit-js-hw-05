@@ -1,30 +1,58 @@
-// * Задача 1.
-// Станція з продажу ремонтних дроїдів готова до запуску, залишилося написати програмне забезпечення
-// для відділу продажів. Оголоси функцію makeTransaction(quantity, pricePerDroid, customerCredits),
-// яка складає та повертає повідомлення про купівлю ремонтних дроїдів.
-// Вона оголошує три параметри, значення яких будуть задаватися під час її виклику:
-// quantity — кількість замовлених дроїдів
-// pricePerDroid — ціна одного дроїда
-// customerCredits — сума коштів на рахунку клієнта
-// Доповни функцію таким чином:
-// Оголоси змінну для зберігання загальної суми замовлення (загальна вартість усіх замовлених дроїдів) і задай їй вираз
-// розрахунку цієї суми.
-// Додай перевірку, чи зможе клієнт оплатити замовлення:
-// якщо сума до сплати перевищує кількість кредитів на рахунку клієнта, функція має повертати рядок "Insufficient funds!"
-// в іншому випадку функція має повертати рядок "You ordered <quantity> droids worth <totalPrice> credits!",
-// де <quantity> це кількість замовлених дроїдів, а <totalPrice> це їх загальна вартість.
+// * Задача 1. Імена користувачів
+// Напиши стрілочну функцію getUserNames(users), яка прийматиме один параметр users
+// — масив об’єктів користувачів.
+// Функція має повертати масив імен усіх користувачів (властивість name) із масиву users.
 
-function makeTransaction(quantity, pricePerDroid, customerCredits) {
-  const total = quantity * pricePerDroid;
-  return customerCredits >= total
-    ? `You ordered ${quantity} droids worth ${total} credits!`
-    : 'Insufficient funds!';
-}
+const getUserNames = users => {
+  if (!Array.isArray(users)) {
+    return 'Needs to be an array';
+  }
+
+  if (!users.every(user => typeof user === 'object' && 'name' in user)) {
+    return 'Each item must be an object with a "name" property';
+  }
+
+  return users.map(user => user.name);
+};
 
 console.group('task-1');
-console.log(makeTransaction(5, 3000, 23000)); // "You ordered 5 droids worth 15000 credits!"
-console.log(makeTransaction(3, 1000, 15000)); // "You ordered 3 droids worth 3000 credits!"
-console.log(makeTransaction(10, 5000, 8000)); // "Insufficient funds!"
-console.log(makeTransaction(8, 2000, 10000)); // "Insufficient funds!"
-console.log(makeTransaction(10, 500, 5000)); // "You ordered 10 droids worth 5000 credits!"
+console.log(
+  getUserNames([
+    {
+      name: 'Moore Hensley',
+      email: 'moorehensley@indexia.com',
+      balance: 2811,
+    },
+    {
+      name: 'Sharlene Bush',
+      email: 'sharlenebush@tubesys.com',
+      balance: 3821,
+    },
+    {
+      name: 'Ross Vazquez',
+      email: 'rossvazquez@xinware.com',
+      balance: 3793,
+    },
+    {
+      name: 'Elma Head',
+      email: 'elmahead@omatom.com',
+      balance: 2278,
+    },
+    {
+      name: 'Carey Barr',
+      email: 'careybarr@nurali.com',
+      balance: 3951,
+    },
+    {
+      name: 'Blackburn Dotson',
+      email: 'blackburndotson@furnigeer.com',
+      balance: 1498,
+    },
+    {
+      name: 'Sheree Anthony',
+      email: 'shereeanthony@kog.com',
+      balance: 2764,
+    },
+  ]),
+); // ["Moore Hensley", "Sharlene Bush", "Ross Vazquez", "Elma Head", "Carey Barr", "Blackburn Dotson", "Sheree Anthony"]
 console.groupEnd();

@@ -1,22 +1,101 @@
-// * Задача 3.
-// Функція checkForSpam(message) приймає рядок (параметр message), перевіряє його на вміст заборонених слів
-// spam і sale, і повертає результат перевірки.
-// Слова в рядку параметра message можуть бути в довільному регістрі, наприклад SPAM або sAlE.
-// Доповни код функції таким чином, що:
-// Якщо знайдено заборонене слово (spam або sale), то функція повертає буль true
-// Якщо в рядку відсутні заборонені слова, функція повертає буль false
+// * Задача 3. Сортування за кількістю друзів
+// Напиши стрілочну функцію sortByDescendingFriendCount(users),
+// яка прийматиме один параметр users — масив об’єктів користувачів.
+// Функція має повертати масив усіх користувачів,
+// відсортованих за спаданням кількостій їх друзів (властивість friends).
 
-function checkForSpam(message) {
-  const lowerCaseMessage = message.toLowerCase();
-  return lowerCaseMessage.includes('sale') || lowerCaseMessage.includes('spam');
-}
+const isValidArray = array =>
+  Array.isArray(array) &&
+  array.every(el => typeof el === 'object' && Array.isArray(el.friends));
+
+// =====================================================================================
+
+const sortByDescendingFriendCount = users => {
+  if (!isValidArray(users)) {
+    return 'Array of objects needed';
+  }
+
+  return users.toSorted((a, b) => b.friends.length - a.friends.length);
+};
+
+// =====================================================================================
 
 console.group('task-3');
-console.log(checkForSpam('Latest technology news')); // false
-console.log(checkForSpam('JavaScript weekly newsletter')); // false
-console.log(checkForSpam('Get best sale offers now!')); // true
-console.log(checkForSpam('Amazing SalE, only tonight!')); // true
-console.log(checkForSpam('Trust me, this is not a spam message')); // true
-console.log(checkForSpam('Get rid of sPaM emails. Our book in on sale!')); // true
-console.log(checkForSpam('[SPAM] How to earn fast money?')); // true
+console.log(
+  sortByDescendingFriendCount([
+    {
+      name: 'Moore Hensley',
+      friends: ['Sharron Pace'],
+      gender: 'male',
+    },
+    {
+      name: 'Sharlene Bush',
+      friends: ['Briana Decker', 'Sharron Pace'],
+      gender: 'female',
+    },
+    {
+      name: 'Ross Vazquez',
+      friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+      gender: 'male',
+    },
+    {
+      name: 'Elma Head',
+      friends: ['Goldie Gentry', 'Aisha Tran'],
+      gender: 'female',
+    },
+    {
+      name: 'Carey Barr',
+      friends: ['Jordan Sampson', 'Eddie Strong'],
+      gender: 'male',
+    },
+    {
+      name: 'Blackburn Dotson',
+      friends: ['Jacklyn Lucas', 'Linda Chapman'],
+      gender: 'male',
+    },
+    {
+      name: 'Sheree Anthony',
+      friends: ['Goldie Gentry', 'Briana Decker'],
+      gender: 'female',
+    },
+  ]),
+);
+// [
+//   {
+//     name: "Ross Vazquez",
+//     friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+//     gender: "male"
+//   },
+//   {
+//     name: "Sharlene Bush",
+//     friends: ["Briana Decker", "Sharron Pace"],
+//     gender: "female"
+//   },
+//   {
+//     name: "Elma Head",
+//     friends: ["Goldie Gentry", "Aisha Tran"],
+//     gender: "female"
+//   },
+//   {
+//     name: "Carey Barr",
+//     friends: ["Jordan Sampson", "Eddie Strong"],
+//     gender: "male"
+//   },
+//   {
+//     name: "Blackburn Dotson",
+//     friends: ["Jacklyn Lucas", "Linda Chapman"],
+//     gender: "male"
+//   },
+//   {
+//     name: "Sheree Anthony",
+//     friends: ["Goldie Gentry", "Briana Decker"],
+//     gender: "female"
+//   },
+//   {
+//     name: "Moore Hensley",
+//     friends: ["Sharron Pace"],
+//     gender: "male"
+//   }
+// ]
+
 console.groupEnd();
